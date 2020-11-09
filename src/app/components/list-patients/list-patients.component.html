@@ -1,0 +1,47 @@
+<section class="row mt-5">
+    <div class="col">
+       
+            <div class="row">
+                <button class="btn btn-primary float-right mb-3" data-toggle="modal"
+        [routerLink]="['']">Principal</button>
+            </div>
+         
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Propietario</th>
+                    <th scope="col">Paciente</th>
+                    <th scope="col">Especie</th>
+                    <th scope="col">Raza</th>
+                    <th scope="col">Sexo</th>
+                    <th scope="col">Pelaje</th>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- {{patients | json}} -->
+                <tr *ngFor="let patient of patients |orderBy: order;index as i">
+                    <th scope="row">{{i + 1}}</th>
+                    <td scope="col">{{patient.propietario}}</td>
+                    <td scope="col">{{patient.paciente }}</td>
+                    <td scope="col">{{patient.idEspecie == 1 ? 'Canino' : 'Felino'}}</td>
+                    <td scope="col">{{patient.raza}}</td>
+                    <td scope="col">{{patient.idSexo == 1 ? 'Macho' : 'Hembra'}}</td>
+                    <td scope="col">{{patient.pelaje}}</td>
+                    <td scope="col">&nbsp;</td>
+                    <td scope="col">&nbsp;</td>
+                    <td>
+                        <button class= "btn btn-warning"  data-toggle="modal"
+                        data-target="#patientModal" (click)="onPreUpdatePatient(patient)">Editar</button>
+                    </td>
+                    <td>
+                        <button class= "btn btn-danger" (click)="onDeletePatient(patient.id)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>  
+        </table>
+    </div>
+</section>
+<app-modal-patient ></app-modal-patient>

@@ -1,0 +1,72 @@
+<div class="modal fade" id="patientModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            {{ !this.dataSvc.selectedPatient.id ? 'Nuevo Paciente' : 'Editar Paciente'}}
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form name="formPatient" #formPatient="ngForm" (ngSubmit)="onSavePatient(formPatient)">
+            <!-- <input type="hidden" name="id" > -->
+              <input type="hidden" name="idPropietario" [value]="seleccionado.id"
+              [(ngModel)]="seleccionado.id">
+
+              <input type="hidden" name="propietario" [value]="seleccionado.owner"
+              [(ngModel)]="seleccionado.owner">
+
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Paciente:</label>
+              <input type="text" name="paciente" class="form-control"  
+              [(ngModel)]="this.dataSvc.selectedPatient.paciente">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="idEspecie">Especie</label>
+                <select name="idEspecie" class="form-control"
+                [(ngModel)]="this.dataSvc.selectedPatient.idEspecie">
+                  <option value="1">Canino</option> 
+                  <option value="2">Felino</option> 
+                </select>  
+              </div>
+              <div class="form-group col-md-6">
+                <label for="idSexo">Sexo</label>
+                <select name="idSexo" class="form-control"
+                [(ngModel)]="this.dataSvc.selectedPatient.idSexo">
+                  <option value="1">Macho</option> 
+                  <option value="2">Hembra</option> 
+                </select>  
+              </div>
+            </div>
+  
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="recipient-name" class="col-form-label">Raza:</label>
+                <select name="idRaza" class="form-control" 
+                   [(ngModel)]="this.dataSvc.selectedPatient.idRaza" required >
+                <option *ngFor="let breed of breeds" value={{breed.raza}}>{{breed.raza}}</option>  
+                </select>  
+            </div>
+            <div class="form-group col-md-6">
+                <label for="recipient-name" class="col-form-label">Pelaje:</label>
+                <input type="text"  name="pelaje" class="form-control" 
+                [(ngModel)]="this.dataSvc.selectedPatient.pelaje">
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <p><a href="#" class="tooltip-test" title="Ingresa al sistema una nueva Raza" data-toggle="modal"  data-target="#modalBreed">Nueva</a></p>
+            </div>
+          
+            <div class="modal-footer">
+              <button class="btn btn-primary" type="submit" >Guardar</button>
+              <button type="button" class="btn btn-secondary"  #btnClose data-dismiss="modal">Cerrar</button>
+            </div>
+          </form>   
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-modal-breed ></app-modal-breed>

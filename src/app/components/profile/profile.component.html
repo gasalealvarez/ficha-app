@@ -1,0 +1,60 @@
+
+<form>  
+    <div class="form-group">
+      <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Reseña</h1>
+      <hr class="mt-2 mb-5">
+      <label for="formControlSelectOwner">Propietario: </label>
+      
+      <!-- <select  class="form-control" name="selectOwner" (click)="onSelect($event.target.value)">
+        <option *ngFor="let owner of owners" value="{{owner}}">
+            {{owner.owner}}
+        </option>
+       </select> -->
+
+        <select class="form-control"  name="miselect" [(ngModel)]="seleccionado" (change)="onSelect()" >
+        <option [ngValue]="owner" *ngFor="let owner of owners">{{owner.owner}}</option>
+        </select>
+    </div>
+    
+    <div class="form-group" *ngIf="patients?.length > 0">
+      <label for="formControlSelectPatient">Pacientes:</label>
+        <select  class="form-control" id="formControlSelectPatient" [(ngModel)]="this.dataSvc.selectedPatient.id" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let patient of patients" value="{{patient.id}}">
+                {{patient.paciente}}
+            </option>
+        </select>
+    </div>
+
+    <div class="text-center" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group" role="group" aria-label="First group">
+        <!-- <button type="button" class="btn btn-danger" data-toggle="modal"  data-target="#ownerModal">Nuevo Propietario</button> -->
+        <button type="button" class="btn btn-dark" [routerLink]="['profile/list-owners']">Propietario</button>
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" 
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        *ngIf="seleccionado.id">
+          Paciente
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" data-toggle="modal"
+          data-target="#patientModal">Nuevo Paciente</a>
+          <a class="dropdown-item" href="/profile/list-patients">Todos</a>
+          <a class="dropdown-item" (click)="verHistorial(seleccionado.id)">{{ seleccionado.id}}</a>
+        </div>
+        
+        <!-- <button type="button" class="btn btn-secondary" data-toggle="modal"
+        data-target="#patientModal"
+        *ngIf="seleccionado.id">Paciente</button> -->
+        <!-- <button type="button" class="btn btn-secondary" data-toggle="modal"  data-target="#exampleModal"
+        *ngIf="this.dataSvc.selectedOwner.id">Nuevo Paciente</button> -->
+
+      </div>
+    </div>
+
+    <div class="form-group mt-2">
+      <!-- <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="onclick(this.dataSvc.selectedOwner.id)">
+        Ficha
+      </button> -->
+    </div>
+  </form>
+
+  <app-modal-patient [seleccionado]="seleccionado"></app-modal-patient>

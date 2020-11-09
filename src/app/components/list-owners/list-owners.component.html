@@ -1,0 +1,43 @@
+<section class="row mt-5">
+    <div class="col">
+        <button class="btn btn-primary float-right mb-3" data-toggle="modal"
+            data-target="#ownerModal" (click)="newOnwer(owners)">Nuevo Propietario</button>
+            <div class="row">
+                <button class="btn btn-primary float-right mb-3" data-toggle="modal"
+        [routerLink]="['']">Principal</button>
+            </div>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Propietario</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Comentarios</th>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let owner of owners |orderBy: order;index as i">
+                    <th scope="row">{{i + 1}}</th>
+                    <td scope="col">{{owner.owner}}</td>
+                    <td scope="col">{{owner.address}}</td>
+                    <td scope="col">{{owner.phone}}</td>
+                    <td scope="col">{{owner.comments}}</td>
+                    <td scope="col">&nbsp;</td>
+                    <td scope="col">&nbsp;</td>
+                    <td>
+                        <button class= "btn btn-warning"  data-toggle="modal"
+                        data-target="#ownerModal" (click)="onPreUpdateOwner(owner)">Editar</button>
+                    </td>
+                    <td>
+                        <button class= "btn btn-danger" (click)="onDeleteOwner(owner.id)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>  
+        </table>
+    </div>
+</section>
+<app-modal-owner ></app-modal-owner>

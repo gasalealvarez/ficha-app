@@ -1,0 +1,15 @@
+.table-wrapper {
+    max-height: 150px;
+    overflow: auto;
+    display:inline-block;
+  }
+  .table-earnings {
+    background: #F3F5F6;
+  }
+  .btn.btn-primary{
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+  }

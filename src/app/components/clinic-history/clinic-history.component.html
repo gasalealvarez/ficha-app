@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card-header">
+      Complementarios
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <label>Fecha:</label>
+        <input type="date">
+      </div>
+      <div class="form-group">
+        <label>Comentarios:</label>
+        <textarea id="textComplementarios"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <h5>Seleccionar Archivo</h5>
+        <input type="file" accept=".pdf" (change)="onUpload($event)"> 
+        <input #inputFile type="text" [value]="downloadURL">
+      </div>   
+      <div class="progress">
+      <div class="progress-bar progress-bar-striped bg-success" role="progressbar" 
+      [style.width]="(uploadPercent | async) + '%'">
+      </div>
+      <br>
+      </div>  
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
